@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const TEST_URL = "http://20.244.56.144/test/"
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQyNDgyMTc3LCJpYXQiOjE3NDI0ODE4NzcsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6ImM3MDE1NTdlLThlMDYtNGY0MS04YmQ0LWRhYjI5ODg3NzhkMSIsInN1YiI6ImJob3dtaWtfY2hhd2RhQHNybWFwLmVkdS5pbiJ9LCJjb21wYW55TmFtZSI6ImdvTWFydCIsImNsaWVudElEIjoiYzcwMTU1N2UtOGUwNi00ZjQxLThiZDQtZGFiMjk4ODc3OGQxIiwiY2xpZW50U2VjcmV0IjoicEFBeFd2QU9yalVzbW5oVyIsIm93bmVyTmFtZSI6IkJob3dtaWsiLCJvd25lckVtYWlsIjoiYmhvd21pa19jaGF3ZGFAc3JtYXAuZWR1LmluIiwicm9sbE5vIjoiQVAyMjExMDAxMDk2MiJ9.AHEX0wqL3SLMHrOhnDQnEHtRWzhGlKPwx9jd88TGjwQ"
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQyNDgyOTcxLCJpYXQiOjE3NDI0ODI2NzEsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6ImM3MDE1NTdlLThlMDYtNGY0MS04YmQ0LWRhYjI5ODg3NzhkMSIsInN1YiI6ImJob3dtaWtfY2hhd2RhQHNybWFwLmVkdS5pbiJ9LCJjb21wYW55TmFtZSI6ImdvTWFydCIsImNsaWVudElEIjoiYzcwMTU1N2UtOGUwNi00ZjQxLThiZDQtZGFiMjk4ODc3OGQxIiwiY2xpZW50U2VjcmV0IjoicEFBeFd2QU9yalVzbW5oVyIsIm93bmVyTmFtZSI6IkJob3dtaWsiLCJvd25lckVtYWlsIjoiYmhvd21pa19jaGF3ZGFAc3JtYXAuZWR1LmluIiwicm9sbE5vIjoiQVAyMjExMDAxMDk2MiJ9.lVS7UlzkYj-1sJXWuLnScOTvY6Pp2z-8i-4P-BdQLjM"
 
 const axiosConfig = {
     headers: {
@@ -12,7 +12,7 @@ const axiosConfig = {
 export const getTopPost = async (req, res) => { 
     try {
         const { type } = req.query;
-        const usersResponse = await axios.get(`${TEST_URL}users`, axiosConfig);
+        const usersResponse = await axios.get(`${TEST_URL}/users`, axiosConfig);
         const usersObj = usersResponse.data.users;
         const users = Object.keys(usersObj);
 
@@ -32,7 +32,7 @@ export const getTopPost = async (req, res) => {
         }));
 
         const maxComments = Math.max(...Object.values(commentCounts));
-        const popularPosts = allPosts.filter(post => commentCounts[post.id] === maxComments);
+        const popularPosts = allPosts.filter(post => commentCounts[post.id] === maxComments).slice(0, 5);
 
         const latestPosts = allPosts
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))

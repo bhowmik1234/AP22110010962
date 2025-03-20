@@ -3,6 +3,6 @@ import { getTopPost } from "../controllers/topPost.controller.js";
 
 const app = express.Router();
 
-app.get('/posts?type=popular', getTopPost);
+app.get('/posts', getTopPost);
 
 export default app;
