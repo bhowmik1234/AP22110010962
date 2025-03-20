@@ -1,5 +1,5 @@
 import express from "express";
-import { getTopPost } from "../controllers/topPost";
+import { getTopPost } from "../controllers/topPost.controller.js";
 
 const app = express.Router();
 

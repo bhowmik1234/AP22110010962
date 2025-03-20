@@ -1,6 +1,6 @@
-import express from express;
-import topUser from './routes/topUser';
-import topPost from './routes/topPost';
+import express from "express";
+import topUser from "./routes/topUser.js";
+import topPost from "./routes/topPost.js";
 
 const app = express();
 const PORT = 3000;
